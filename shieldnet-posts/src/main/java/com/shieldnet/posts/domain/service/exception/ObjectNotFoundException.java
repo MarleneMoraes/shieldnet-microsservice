@@ -1,4 +1,4 @@
-package com.shieldnet.posts.services.exception;
+package com.shieldnet.posts.domain.service.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

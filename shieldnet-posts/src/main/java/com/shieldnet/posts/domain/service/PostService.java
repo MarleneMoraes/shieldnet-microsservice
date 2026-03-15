@@ -1,15 +1,16 @@
-package com.shieldnet.posts.services;
+package com.shieldnet.posts.domain.service;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shieldnet.posts.domain.Post;
-import com.shieldnet.posts.repository.PostRepository;
-import com.shieldnet.posts.services.exception.ObjectNotFoundException;
+import com.shieldnet.posts.domain.model.Post;
+import com.shieldnet.posts.domain.service.exception.ObjectNotFoundException;
+import com.shieldnet.posts.infrastructure.persistence.PostRepository;
 
 @Service
 public class PostService {
@@ -26,8 +27,7 @@ public class PostService {
 		return repo.searchTitle(text);
 	}
 	
-	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
-		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
-		return repo.fullSearch(text, minDate, maxDate);
+	public List<Post> fullSearch(String text, Instant minDate, Instant maxDate) {
+		return repo.fullSearch(text, minDate, maxDate.plus(1, ChronoUnit.DAYS));
 	}
 }

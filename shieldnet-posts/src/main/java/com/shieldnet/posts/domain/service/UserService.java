@@ -1,4 +1,4 @@
-package com.shieldnet.posts.services;
+package com.shieldnet.posts.domain.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shieldnet.posts.domain.User;
-import com.shieldnet.posts.dto.UserDTO;
-import com.shieldnet.posts.repository.UserRepository;
-import com.shieldnet.posts.services.exception.ObjectNotFoundException;
+import com.shieldnet.posts.domain.dto.UserDTO;
+import com.shieldnet.posts.domain.model.User;
+import com.shieldnet.posts.domain.service.exception.ObjectNotFoundException;
+import com.shieldnet.posts.infrastructure.persistence.UserRepository;
 
 @Service
 public class UserService {
@@ -46,7 +46,7 @@ public class UserService {
 		newObj.setEmail(obj.getEmail());
 	}
 
-	public User fromDTO(UserDTO objDto) {
-		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+	public User fromDTO(UserDTO dto) {
+		return new User(dto.id(),dto.name(), dto.email());
 	}
 }

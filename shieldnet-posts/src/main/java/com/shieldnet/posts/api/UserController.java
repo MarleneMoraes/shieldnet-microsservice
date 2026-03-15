@@ -1,4 +1,4 @@
-package com.shieldnet.posts.resources;
+package com.shieldnet.posts.api;
 
 import java.net.URI;
 import java.util.List;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.shieldnet.posts.domain.Post;
-import com.shieldnet.posts.domain.User;
-import com.shieldnet.posts.dto.UserDTO;
-import com.shieldnet.posts.services.UserService;
+import com.shieldnet.posts.domain.dto.UserDTO;
+import com.shieldnet.posts.domain.model.Post;
+import com.shieldnet.posts.domain.model.User;
+import com.shieldnet.posts.domain.service.UserService;
 
 @RestController
 @RequestMapping(value="/users")
-public class UserResource {
+public class UserController {
 
 	@Autowired
 	private UserService service;
