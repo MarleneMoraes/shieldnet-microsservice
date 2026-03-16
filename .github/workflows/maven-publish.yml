@@ -27,11 +27,19 @@ jobs:
         server-id: github
         settings-path: ${{ github.workspace }}
 
-    - name: Build with Maven
-      run: mvn -B clean package --file pom.xml
+    - name: Build ShieldNet Services
+      run: |
+        for service in shieldnet-posts shieldnet-auth; do
+          echo "Building $service..."
+          mvn -B clean package --file $service/pom.xml
+        done
 
     - name: Publish to GitHub Packages
       if: github.event_name == 'release'
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: |
+        for service in shieldnet-posts shieldnet-auth; do
+          echo "Deploying $service..."
+          mvn deploy -s $GITHUB_WORKSPACE/settings.xml --file $service/pom.xml
+        done
       env:
         GITHUB_TOKEN: ${{ github.token }}
